@@ -1,0 +1,33 @@
+buildscript{
+    //build.gradle에서 사용하는 전역변수를 설정하는 키워드
+    ext{
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories{
+        mavenCentral()
+        jcenter()
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "org.springframework.boot"
+//스프링 부트의 의존성들을 관리해주는 플러그인
+apply plugin: "io.spring.dependency-management"
+
+//각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 지정
+repositories{
+    mavenCentral()
+    jcenter()
+}
+
+//프로젝트 개발에 필요한 의존성들을 선언
+dependencies{
+    //책에는 complie/testCompile로 작성되었으나 현재 Gradle 버전에서 해당 method는 deprecated됨
+    //대신 implementation/testImplementation 사용
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
